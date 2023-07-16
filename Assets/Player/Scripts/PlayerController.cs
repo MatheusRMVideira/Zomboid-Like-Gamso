@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private float runSpeed = 10;
     private float moveSpeed;
 
+    public bool isRunning = false;
+
     private SurvivalStatsManager survivalStatsManager;
 
     Rigidbody rigidbody;
@@ -26,6 +28,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
+        
+    }
+
+    void FixedUpdate()
+    {
         Vector3 mousePos = viewCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, viewCamera.transform.position.y));
         transform.LookAt(mousePos + Vector3.up * transform.position.y);
         //Run if pressing shift
@@ -35,18 +44,15 @@ public class PlayerController : MonoBehaviour
             moveSpeed = runSpeed;
             stamina.StartDepletion();
             stamina.StopRecovery();
+            isRunning = true;
         }
         else
         {
             moveSpeed = walkSpeed;
             stamina.StartRecovery();
             stamina.StopDepletion();
+            isRunning = false;
         }
-        
-    }
-
-    void FixedUpdate()
-    {
         velocity = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized * moveSpeed;
         rigidbody.MovePosition(rigidbody.position + velocity * Time.fixedDeltaTime);
     }

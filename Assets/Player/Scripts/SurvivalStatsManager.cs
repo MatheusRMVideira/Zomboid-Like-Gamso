@@ -55,8 +55,8 @@ public class SurvivalStatsManager : MonoBehaviour
     }
 
 
-    private void LateUpdate()
-    {
+    private void Update()
+    {   
         health.Update();
         hunger.Update();
         thirst.Update();

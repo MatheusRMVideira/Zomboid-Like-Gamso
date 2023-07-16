@@ -9,6 +9,8 @@ public class FieldOfView : MonoBehaviour
     [Range(0, 360)]
     public float viewAngle;
 
+    public float bleedDistance;
+
     public LayerMask objectMask;
     public LayerMask wallMask;
 
@@ -120,7 +122,7 @@ public class FieldOfView : MonoBehaviour
         vertices[0] = Vector3.zero;
         for(int i = 0; i < vertexCount - 1; i++)
         {
-            vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
+            vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]) + Vector3.forward * bleedDistance;
             if( i < vertexCount - 2)
             {
                 triangles[i * 3] = 0;
