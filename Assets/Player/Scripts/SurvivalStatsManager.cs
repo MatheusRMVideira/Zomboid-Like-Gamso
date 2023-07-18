@@ -133,6 +133,15 @@ public class SurvivalStatsManager : MonoBehaviour
         }
     }
 
+    public void UseItem(Item item)
+    {
+        this.health.Add(item.health);
+        this.hunger.Add(item.hunger);
+        this.thirst.Add(item.thirst);
+        this.sleep.Add(item.sleep);
+        this.sanity.Add(item.sanity);
+    }
+
     [System.Serializable]
     public struct SurvivalStatsVariables
     {
@@ -242,13 +251,13 @@ public class SurvivalStatsManager : MonoBehaviour
             return _current >= _variables._max;
         }
 
-        public float InstantAdd(float value)
+        public float Add(float value)
         {
             _current = Mathf.Clamp(_current + value, 0, _variables._max);
             return _current;
         }
 
-        public float InstantSubtract(float value)
+        public float Subtract(float value)
         {
             _current = Mathf.Clamp(_current - value, 0, _variables._max);
             return _current;
